@@ -1,7 +1,3 @@
-# algo
-
-# algo
-
 ### Algorithm ☑️
 
 
