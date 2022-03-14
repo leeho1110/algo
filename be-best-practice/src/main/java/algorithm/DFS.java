@@ -1,6 +1,6 @@
 package algorithm;
 
-import main.java.DataStructure.Stack;
+import datastructure.Stack;
 
 import java.util.LinkedList;
 
