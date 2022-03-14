@@ -15,7 +15,7 @@ public class PressKeypad {
 		private int[] rightHandLocation = {3,2};
 
 		private String usedHand;
-		private String pressHistory;
+		private String pressHistory = "";
 
 		public Finger(String hand) {
 			this.usedHand = hand;
@@ -27,25 +27,26 @@ public class PressKeypad {
 			}
 		}
 
-		public void press(int number) {
-			pressHistory += selecteHand(number);
+		private void press(int number) {
+			pressHistory += selectHand(number);
 		}
 
-		public String selecteHand(int number){
+		private String selectHand(int number){
 			String hand = "";
-			if(number == 1 || number == 4 || number == 7){
-				leftHandLocation = getHandLocation(number);
+
+			if(number == 1 || number == 4 || number == 7) {
 				hand = "L";
 			};
 
 			if(number == 3 || number == 6 || number == 9){
-				rightHandLocation = getHandLocation(number);
 				hand = "R";
 			};
 
-			if(number == 2 || number == 5 || number == 8 || number == 0){
+			if(number == 2 || number == 5 || number == 8 || number == 0) {
 				hand = choice(number);
 			}
+
+			changeHandLocation(getHandLocation(number), hand.equals("R") ? "right" : "left");
 
 			return hand;
 		}
@@ -65,16 +66,38 @@ public class PressKeypad {
 			return new int[]{0,0};
 		}
 
-		public String choice(int number) {
+		private String choice(int number) {
+			String hand = "";
 			int[] numberLocation = getHandLocation(number);
 
-			int leftEnergy = Math.abs(numberLocation[0]-leftHandLocation[0]) + Math.abs(numberLocation[1]-leftHandLocation[1]);
-			int rightEnergy = Math.abs(numberLocation[0]-rightHandLocation[0]) + Math.abs(numberLocation[1]-rightHandLocation[1]);
+			int leftHandCost = Math.abs(numberLocation[0]-leftHandLocation[0]) + Math.abs(numberLocation[1]-leftHandLocation[1]);
+			int rightHandCost = Math.abs(numberLocation[0]-rightHandLocation[0]) + Math.abs(numberLocation[1]-rightHandLocation[1]);
 
-			if(leftEnergy == rightEnergy){
-				return usedHand.equals("right") ? "R" : "L";
-			} else {
-				return leftEnergy > rightEnergy ? "L" : "R";
+			if(leftHandCost < rightHandCost){
+				hand = "L";
+			} else if(rightHandCost < leftHandCost) {
+				hand = "R";
+			} else if(leftHandCost == rightHandCost){
+				if(usedHand.equals("right")){
+					hand = "R";
+				} else {
+					hand = "L";
+				}
+			}
+
+			changeHandLocation(numberLocation, hand.equals("R") ? "right" : "left");
+
+			return hand;
+		}
+
+		private void changeHandLocation(int[] location, String hand){
+			if(hand.equals("right")){
+				this.rightHandLocation = location;
+				return;
+			}
+			if(hand.equals("left")){
+				this.leftHandLocation = location;
+				return;
 			}
 		}
 
