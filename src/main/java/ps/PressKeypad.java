@@ -27,11 +27,11 @@ public class PressKeypad {
 			}
 		}
 
-		private void press(int number) {
+		public void press(int number) {
 			pressHistory += selecteHand(number);
 		}
 
-		private String selecteHand(int number){
+		public String selecteHand(int number){
 			String hand = "";
 			if(number == 1 || number == 4 || number == 7){
 				leftHandLocation = getHandLocation(number);
@@ -60,12 +60,12 @@ public class PressKeypad {
 			if(number == 7){return new int[]{2,0};}
 			if(number == 8){return new int[]{2,1};}
 			if(number == 9){return new int[]{2,2};}
-			if(number == 0){return new int[]{3,2};}
+			if(number == 0){return new int[]{3,1};}
 
 			return new int[]{0,0};
 		}
 
-		private String choice(int number) {
+		public String choice(int number) {
 			int[] numberLocation = getHandLocation(number);
 
 			int leftEnergy = Math.abs(numberLocation[0]-leftHandLocation[0]) + Math.abs(numberLocation[1]-leftHandLocation[1]);
