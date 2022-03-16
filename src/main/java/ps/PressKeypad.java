@@ -1,7 +1,13 @@
 package ps;
 
+import java.util.Arrays;
+
 // https://programmers.co.kr/learn/courses/30/lessons/67256
 public class PressKeypad {
+
+	private static String RIGHT_HAND = "R";
+	private static String LEFT_HAND = "L";
+
 	public String solution(int[] numbers, String hand) {
 		Finger finger = new Finger(hand);
 		finger.pressButtons(numbers);
@@ -9,7 +15,7 @@ public class PressKeypad {
 		return finger.getPressHistory();
 	}
 
-	private static class Finger {
+	class Finger {
 
 		private int[] leftHandLocation = {3,0};
 		private int[] rightHandLocation = {3,2};
