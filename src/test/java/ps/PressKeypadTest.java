@@ -28,14 +28,24 @@ public class PressKeypadTest {
         String testCase2 = pressKeypad.solution(new int[]{7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2}, "left");
         String testCase3 = pressKeypad.solution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}, "right");
 
-        assertEquals(testCase1, "LRLLLRLLRRL");
-        assertEquals(testCase2, "LRLLRRLLLRR");
-        assertEquals(testCase3, "LLRLLRLLRL");
+        assertThat(testCase1).isEqualTo("LRLLLRLLRRL");
+        assertThat(testCase2).isEqualTo("LRLLRRLLLRR");
+        assertThat(testCase3).isEqualTo("LLRLLRLLRL");
     }
 
-    @DisplayName("주사용손이 제대로 파싱되는가")
+    @DisplayName("이동거리에 근거하여 사용되는 손이 선택되는가")
     @Test
-    public void initHand(){
-        String hand = "right";
+    public void handSelectByDistanceCost(){
+        // 오른손 default: * , 왼손 default: #
+        String choice = finger.choice(3);
+        assertThat(choice).isEqualTo(RIGHT_HAND);
+    }
+
+    @DisplayName("이동거리가 동일할 때 주로 사용하는 손으로 선택되는가")
+    @Test
+    public void handSelectByUsedHandWhenDistanceCostIsEqual(){
+        // 오른손 default: * , 왼손 default: #ㄴ스
+        String choice = finger.choice(0);
+        assertThat(choice).isEqualTo(RIGHT_HAND);
     }
 }
