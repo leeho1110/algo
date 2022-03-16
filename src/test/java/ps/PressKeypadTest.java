@@ -4,11 +4,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
+
 
 public class PressKeypadTest {
 
+    private static String RIGHT_HAND = "R";
+    private static String LEFT_HAND = "L";
+
     private PressKeypad pressKeypad;
+    private PressKeypad.Finger finger = new PressKeypad().new Finger("right");
 
     @BeforeEach
     public void init(){
