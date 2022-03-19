@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class FindCharacter {
 
-    public int solution(String str, char c) {
+    public int solution(String inputString, char inputChar) {
         int answer = 0;
 
-        str = str.toUpperCase();
-        c = Character.toUpperCase(c);
+        inputString = inputString.toUpperCase();
+        inputChar = Character.toUpperCase(inputChar);
 
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == c) {
+        for(char iterChar : inputString.toCharArray()){
+            if (inputChar == iterChar) {
                 answer++;
             }
         }
