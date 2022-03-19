@@ -1,4 +1,4 @@
-package ps;
+package ps.programmers;
 
 public class Ternary {
 
