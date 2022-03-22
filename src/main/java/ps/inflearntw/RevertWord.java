@@ -17,13 +17,7 @@ public class RevertWord {
     }
 
     public String revertSpell(String word){
-        StringBuilder revertedWord = new StringBuilder();
-
-        for(char character : word.toCharArray()){
-            revertedWord.insert(0,character);
-        }
-
-        return revertedWord.toString();
+        return new StringBuilder(word).reverse().toString();
     }
 
     public String[] splitWordByComma(String input){
