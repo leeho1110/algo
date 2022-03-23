@@ -14,8 +14,7 @@ public class PressKeypad {
 
 		return finger.getPressHistory();
 	}
-
-	class Finger {
+	public class Finger {
 
 		private int[] leftHandLocation = {3,0};
 		private int[] rightHandLocation = {3,2};
@@ -47,7 +46,7 @@ public class PressKeypad {
 			return hand;
 		}
 
-		protected String choice(int number) {
+		public String choice(int number) {
 			String hand = "";
 
 			int[] numberLocation = getHandLocation(number);
