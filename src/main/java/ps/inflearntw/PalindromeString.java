@@ -15,31 +15,13 @@ public class PalindromeString {
     private int rightIndex;
 
     public String solution(String input) {
-        initializeIndex(input);
-        char[] inputArray = input.toCharArray();
+        String reversInput = new StringBuilder(input).reverse().toString();
 
-        while (leftIndex < rightIndex) {
-            if (isDifferent(inputArray[leftIndex], inputArray[rightIndex])) {
-                return NOPASS;
-            }
-            moveIndex();
+        if(input.equalsIgnoreCase(reversInput)) {
+            return PASS;
         }
 
-        return PASS;
-    }
-
-    private void initializeIndex(String input) {
-        leftIndex = 0;
-        rightIndex = input.length() - 1;
-    }
-
-    private boolean isDifferent(char input1, char input2) {
-        return input1 != input2;
-    }
-
-    private void moveIndex() {
-        this.leftIndex++;
-        this.rightIndex--;
+        return NOPASS;
     }
 
     public static void main(String[] args) {
