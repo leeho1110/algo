@@ -1,14 +1,13 @@
 package ps.inflearntw;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class ShortestDistance {
 
     private char specific;
     private String text;
+
+    private int distance;
     private int[] answer;
 
     public ShortestDistance(char specific, String text){
@@ -18,28 +17,37 @@ public class ShortestDistance {
     }
 
     public int[] checkDistance(){
-        int maxDistance=99;
-
-        for(int i=0; i<text.length(); i++){
-            if(text.charAt(i) == specific){
-                maxDistance = 0;
-            } else {
-                maxDistance++;
-            }
-            answer[i] = maxDistance;
-        }
-
-        maxDistance=99;
-        for(int i=text.length()-1; i>=0; i--){
-            if(text.charAt(i) == specific){
-                maxDistance = 0;
-            } else {
-                maxDistance++;
-                answer[i] = Math.min(maxDistance, answer[i]);
-            }
-        }
-
+        getBaseDistance();
+        getShortestDistance();
         return answer;
+    }
+
+    private void getBaseDistance() {
+        initializeDistanceToMax();
+        for(int i=0; i<text.length(); i++){
+            checkDistance(i);
+            answer[i] = distance;
+        }
+    }
+
+    private void getShortestDistance() {
+        initializeDistanceToMax();
+        for(int i=text.length()-1; i>=0; i--){
+            checkDistance(i);
+            answer[i] = Math.min(distance, answer[i]);
+        }
+    }
+
+    private void checkDistance(int i) {
+        if(text.charAt(i) == specific){
+            distance = 0;
+        } else {
+            distance++;
+        }
+    }
+
+    private void initializeDistanceToMax() {
+        this.distance = 99;
     }
 
     public static void main(String[] args){
