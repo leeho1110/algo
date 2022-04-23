@@ -36,9 +36,17 @@ public class ShortestDistanceNew {
 
     private int getShortestDistance() {
         String forward = text.substring(index);
-        StringBuilder backward = new StringBuilder(text.substring(0, index + 1)).reverse();
+        StringBuilder backward = new StringBuilder(text.substring(0, index+1)).reverse();
 
-        return Math.min(forward.indexOf(specific),Math.abs(backward.indexOf(specific)));
+        if(cannotFindSpecific(forward, backward)){
+            return Math.max(forward.indexOf(specific),backward.indexOf(specific));
+        } else {
+            return Math.min(forward.indexOf(specific),backward.indexOf(specific));
+        }
+    }
+
+    private boolean cannotFindSpecific(String forward, StringBuilder backward) {
+        return forward.indexOf(specific) < 0 || backward.indexOf(specific) < 0;
     }
 
     private int saveAnswer(int distance) {
