@@ -14,7 +14,7 @@ public class CompressionString {
     public String compression() {
         // check difference from next index until last index
         for (int i = 0; i < text.length() - 1; i++) {
-            addRepeatCountOrAppendAnswerAccordingToDiff();
+            compareToNextIndex();
             moveIndex();
         }
 
@@ -24,7 +24,7 @@ public class CompressionString {
         return answer.toString();
     }
 
-    private void addRepeatCountOrAppendAnswerAccordingToDiff() {
+    private void compareToNextIndex() {
         if (isEqualToNext()) {
             addRepeatCount();
         } else {
