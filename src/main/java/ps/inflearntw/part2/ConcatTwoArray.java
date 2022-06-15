@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConcatTwoArray {
+    private List<Integer> ANSWER = new ArrayList<>();
+
+    private int pointer1 = 0;
+    private int pointer2 = 0;
     private int[] firstArray;
     private int[] secondArray;
 
@@ -17,27 +21,24 @@ public class ConcatTwoArray {
     }
 
     public int[] sorting() {
-        List<Integer> answer = new ArrayList<>();
-        int pointer1 = 0;
-        int pointer2 = 0;
 
         while(pointer1 < firstArray.length && pointer2 < secondArray.length){
             if(firstArray[pointer1] < secondArray[pointer2]){
-                answer.add(firstArray[pointer1++]);
+                ANSWER.add(firstArray[pointer1++]);
             } else {
-                answer.add(secondArray[pointer2++]);
+                ANSWER.add(secondArray[pointer2++]);
             }
         }
 
         if(pointer1 != firstArray.length){
             for (int i = pointer1; i < firstArray.length; i++) {
-                answer.add(firstArray[i]);
+                ANSWER.add(firstArray[i]);
             }
         }
 
         if(pointer2 != secondArray.length){
             for (int i = pointer2; i < secondArray.length; i++) {
-                answer.add(secondArray[i]);
+                ANSWER.add(secondArray[i]);
             }
         }
 
