@@ -21,15 +21,30 @@ public class ConcatTwoArray {
     }
 
     public int[] sorting() {
+        addSmallerValueByPointer();
+        addLeftovers();
+        return ANSWER.stream().mapToInt(Integer::intValue).toArray();
+    }
 
-        while(pointer1 < firstArray.length && pointer2 < secondArray.length){
-            if(firstArray[pointer1] < secondArray[pointer2]){
+    private void addSmallerValueByPointer() {
+        while(untilSmallerThanArrayLength(pointer1, pointer2)){
+            if(isSmallerThan(pointer1, pointer2)){
                 ANSWER.add(firstArray[pointer1++]);
             } else {
                 ANSWER.add(secondArray[pointer2++]);
             }
         }
+    }
 
+    private boolean untilSmallerThanArrayLength(int pointer1, int pointer2) {
+        return pointer1 < firstArray.length && pointer2 < secondArray.length;
+    }
+
+    private boolean isSmallerThan(int pointer1, int pointer2) {
+        return firstArray[pointer1] < secondArray[pointer2];
+    }
+
+    private void addLeftovers() {
         if(isDifferentWith(pointer1, firstArray.length)){
             for (int i = pointer1; i < firstArray.length; i++) {
                 ANSWER.add(firstArray[i]);
@@ -41,8 +56,8 @@ public class ConcatTwoArray {
                 ANSWER.add(secondArray[i]);
             }
         }
+    }
 
-        return answer.stream().mapToInt(Integer::intValue).toArray();
     private boolean isDifferentWith(int pointer, int arrayLenth) {
         return pointer != arrayLenth;
     }
