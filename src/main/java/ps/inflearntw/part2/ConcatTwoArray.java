@@ -30,18 +30,20 @@ public class ConcatTwoArray {
             }
         }
 
-        if(pointer1 != firstArray.length){
+        if(isDifferentWith(pointer1, firstArray.length)){
             for (int i = pointer1; i < firstArray.length; i++) {
                 ANSWER.add(firstArray[i]);
             }
         }
 
-        if(pointer2 != secondArray.length){
+        if(isDifferentWith(pointer2, secondArray.length)){
             for (int i = pointer2; i < secondArray.length; i++) {
                 ANSWER.add(secondArray[i]);
             }
         }
 
         return answer.stream().mapToInt(Integer::intValue).toArray();
+    private boolean isDifferentWith(int pointer, int arrayLenth) {
+        return pointer != arrayLenth;
     }
 }
