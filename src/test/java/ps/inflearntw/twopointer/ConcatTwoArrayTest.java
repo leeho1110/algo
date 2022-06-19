@@ -1,11 +1,7 @@
-package ps.inflearntw.part2;
+package ps.inflearntw.twopointer;
 
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
+import ps.inflearntw.twopointer.ConcatTwoArray;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

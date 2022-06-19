@@ -1,4 +1,4 @@
-package ps.inflearntw.part2;
+package ps.inflearntw.twopointer;
 
 import java.util.ArrayList;
 import java.util.List;
