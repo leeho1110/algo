@@ -2,10 +2,11 @@ package ps.inflearntw.twopointer;
 
 public class Subsequence {
     private int criteria;
-    private int target;
+    private int sum;
     private int[] numbers;
     private int answer;
     private int leftPointer;
+    private int rightPointer;
 
     public Subsequence(int[] numbers, int criteria) {
         this.numbers = numbers;
@@ -13,31 +14,31 @@ public class Subsequence {
     }
 
     public int findAvailableCase() {
-        for(int rightPointer = 0; rightPointer<numbers.length; rightPointer++){
-            // RT
-            addTargetWithValueOf(rightPointer);
-
-            if(isEqualToCriteria(target)){
-                answer++;
-            }
-
-            subtractUntilEqualOrBiggerThanCriteria();
+        for (rightPointer = 0; rightPointer < numbers.length; rightPointer++) {
+            addSumToValueOf(rightPointer);
+            findFromEndPointer();
+            findFromStartPointer();
         }
         return answer;
     }
 
-    private void subtractUntilEqualOrBiggerThanCriteria() {
-        while(isEqualOrBiggerTo(target)){
-            subtractLeftPointersValue();
+    private void findFromEndPointer() {
+        if (isEqualToCriteria(sum)) {
+            answer++;
+        }
+    }
 
-            if(isEqualToCriteria(target)){
+    private void findFromStartPointer() {
+        while (isEqualOrBiggerTo(sum)) {
+            minusLeftPointersValueAndMoveIndex();
+            if (isEqualToCriteria(sum)) {
                 answer++;
             }
         }
     }
 
-    private void subtractLeftPointersValue() {
-        target -= numbers[leftPointer++];
+    private void minusLeftPointersValueAndMoveIndex() {
+        sum -= numbers[leftPointer++];
     }
 
     private boolean isEqualOrBiggerTo(int sum) {
@@ -48,7 +49,7 @@ public class Subsequence {
         return sum == criteria;
     }
 
-    private void addTargetWithValueOf(int rightPointer) {
-        target += numbers[rightPointer];
+    private void addSumToValueOf(int rightPointer) {
+        sum += numbers[rightPointer];
     }
 }
