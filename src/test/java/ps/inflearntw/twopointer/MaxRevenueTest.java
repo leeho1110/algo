@@ -16,14 +16,14 @@ public class MaxRevenueTest {
     public void integration(){
         // given
         MaxRevenueCalculator maxRevenueCal = MaxRevenueCalculator.of(new int[]{12, 15, 11, 20, 25, 10, 20, 19, 13, 15}, 3);
+        MaxRevenueCalculator maxRevenueCal2 = MaxRevenueCalculator.of(new int[]{100, 15, 11, 20, 25, 10, 20, 19, 13, 15}, 3);
 
         // when
         int result = maxRevenueCal.findMaxRevenue();
+        int result2 = maxRevenueCal2.findMaxRevenue();
 
         // then
         assertThat(result).isEqualTo(56);
+        assertThat(result2).isEqualTo(126);
     }
-
-    // 38 46 56 55 49
-    // 46
 }
