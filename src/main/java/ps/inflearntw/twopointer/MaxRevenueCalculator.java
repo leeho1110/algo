@@ -18,16 +18,16 @@ public class MaxRevenueCalculator {
     }
 
     public int findMaxRevenue() {
-        // 배열을 돌며
-        int baseRevenue = calculateBaseRevenue();
-        compareSumForPeriodTo(baseRevenue);
+        calculateBaseRevenue();
+        compareSumForPeriodTo();
         return answer;
     }
 
-    private void compareSumForPeriodTo(int sumInPeriod) {
-        for(int i=period; i<revenues.length; i++){
-            sumInPeriod = calculateSumInNextPeriod(sumInPeriod);
-            changeAnswerToBiggerFrom(sumInPeriod);
+    private void compareSumForPeriodTo() {
+        int baseSum = answer;
+        for (int i = period; i < revenues.length; i++) {
+            baseSum = calculateSumInNextPeriod(baseSum);
+            changeAnswerToBiggerFrom(baseSum);
         }
     }
 
@@ -39,7 +39,15 @@ public class MaxRevenueCalculator {
         answer = Math.max(answer, baseRevenue);
     }
 
-    private int calculateBaseRevenue() {
-        return Arrays.stream(revenues, 0, period).sum();
+    private void calculateBaseRevenue() {
+        // 799ms
+        int temp = 0;
+        for (int i = 0; i < period; i++) {
+            temp += revenues[i];
+        }
+        this.answer = temp;
+
+        // 시간 초과 발생 (1028ms)
+        // answer = Arrays.stream(revenues, 0, period).sum();
     }
 }
