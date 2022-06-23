@@ -19,9 +19,9 @@ class ClassLeaderTest {
         ClassLeader sut = new ClassLeader("BACBACCACCBDEDE");
 
         // when
-        String result = sut.findWinner();
+        Character result = sut.findWinner();
 
         // then
-        assertThat(result).isEqualTo("C");
+        assertThat(result).isEqualTo('C');
     }
 }
