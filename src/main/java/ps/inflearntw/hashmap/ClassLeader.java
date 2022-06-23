@@ -4,6 +4,7 @@ import java.util.*;
 
 public class ClassLeader {
     private final String candidates;
+    private final Map<String, Integer> voteResult = new LinkedHashMap<>();
     private int max;
     private String winner;
 
@@ -12,19 +13,35 @@ public class ClassLeader {
     }
 
     public String findWinner() {
-        Map<String, Integer> voteResult = new LinkedHashMap<>();
-
-        for (String candidate : candidates.split("")) {
-            voteResult.put(candidate, voteResult.getOrDefault(candidate, 1)+1);
-        }
-
-        for( String candidate : voteResult.keySet()){
-            if(voteResult.get(candidate) > max){
-                max = voteResult.get(candidate);
-                winner = candidate;
-            }
-        }
-        
+        countVoteResult();
+        findElected();
         return winner;
+    }
+
+    private void findElected() {
+        for (String candidate : voteResult.keySet()) {
+            compareMaxTo(candidate);
+        }
+    }
+
+    private void compareMaxTo(String candidate) {
+        if (isBiggerThanMax(candidate)) {
+            changeMaxValueOf(candidate);
+            winner = candidate;
+        }
+    }
+
+    private void changeMaxValueOf(String candidate) {
+        max = voteResult.get(candidate);
+    }
+
+    private void countVoteResult() {
+        for (String candidate : candidates.split("")) {
+            voteResult.put(candidate, voteResult.getOrDefault(candidate, 0) + 1);
+        }
+    }
+
+    private boolean isBiggerThanMax(String candidate) {
+        return voteResult.get(candidate) > max;
     }
 }
