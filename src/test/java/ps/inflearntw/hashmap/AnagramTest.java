@@ -3,7 +3,6 @@ package ps.inflearntw.hashmap;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AnagramTest {
 
@@ -18,7 +17,7 @@ class AnagramTest {
         Anagram sut = new Anagram("AbaAeCe", "baeeACA");
 
         // when
-        StringBuilder result = sut.validateIsAnagram();
+        StringBuilder result = sut.check();
 
         // then
         assertThat(result.toString()).isEqualTo("YES");
@@ -30,7 +29,7 @@ class AnagramTest {
         Anagram sut = new Anagram("abaCC", "Caaab");
 
         // when
-        StringBuilder result = sut.validateIsAnagram();
+        StringBuilder result = sut.check();
 
         // then
         assertThat(result.toString()).isEqualTo("NO");

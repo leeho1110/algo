@@ -1,42 +1,50 @@
 package ps.inflearntw.hashmap;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Anagram {
     private final String word1;
     private final String word2;
+    private Map<Character, Integer> map = new HashMap<>();
+    ;
+    private Map<Character, Integer> map2 = new HashMap<>();
+    ;
 
     public Anagram(String word1, String word2) {
         this.word1 = word1;
         this.word2 = word2;
     }
 
-    public StringBuilder validateIsAnagram() {
-        Map<Character, Integer> map = new HashMap<>();
-        Map<Character, Integer> map2 = new HashMap<>();
+    public StringBuilder check() {
+        saveAlphabetAndCount(word1, map);
+        saveAlphabetAndCount(word2, map2);
+        return validateIsAnagram() ? new StringBuilder("YES") : new StringBuilder("NO");
+    }
 
-        for (char alphabet : word1.toCharArray()) {
-            map.put(alphabet, map.getOrDefault(alphabet,0)+1);
+    private void saveAlphabetAndCount(String word, Map<Character, Integer> map) {
+        for (char alphabet : word.toCharArray()) {
+            map.put(alphabet, map.getOrDefault(alphabet, 0) + 1);
         }
+    }
 
-        for (char alphabet : word2.toCharArray()) {
-            map2.put(alphabet, map2.getOrDefault(alphabet,0)+1);
-        }
-
-        Boolean flag = true;
-        for (Character alphabet : map.keySet()) {
-            if(!map2.containsKey(alphabet)){
-                flag = false;
-            } else {
-                if((!(map2.get(alphabet) == map.get(alphabet)))){
-                    flag = false;
-                }
+    private Boolean validateIsAnagram() {
+        for (Map.Entry<Character, Integer> alphabet : map.entrySet()) {
+            if (!hasKeyOf(alphabet)) {
+                return false;
+            }
+            if (!hasSameCountOf(alphabet)) {
+                return false;
             }
         }
+        return true;
+    }
 
-        return flag ? new StringBuilder("YES") : new StringBuilder("NO");
+    private boolean hasSameCountOf(Map.Entry<Character, Integer> entry) {
+        return map2.get(entry.getKey()) == map.get(entry.getKey());
+    }
+
+    private boolean hasKeyOf(Map.Entry<Character, Integer> alphabet) {
+        return map2.containsKey(alphabet.getKey());
     }
 }
