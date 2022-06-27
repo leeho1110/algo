@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TypeOfRevenueTest {
+class RevenueCategoryCalculatorTest {
 
 /*
     현수의 아빠는 제과점을 운영합니다. 현수아빠는 현수에게 N일 동안의 매출기록을 주고 연속된 K일 동안의 매출액의 종류를 각 구간별로 구하라고 했습니다.
@@ -20,10 +20,10 @@ class TypeOfRevenueTest {
     @Test
     public void integration(){
         // given
-        TypeOfRevenue sut = new TypeOfRevenue(new int[]{20, 12, 20, 10, 23, 17, 10}, 4);
+        RevenueCategoryCalculator sut = new RevenueCategoryCalculator(new int[]{20, 12, 20, 10, 23, 17, 10}, 4);
 
         // when
-        int[] result = sut.findTypeInPeriod();
+        int[] result = sut.calculateRevenueCategory();
 
         // then
         assertThat(result).containsExactly(3,4,4,3);
