@@ -7,9 +7,7 @@ public class Anagram {
     private final String word1;
     private final String word2;
     private Map<Character, Integer> map = new HashMap<>();
-    ;
     private Map<Character, Integer> map2 = new HashMap<>();
-    ;
 
     public Anagram(String word1, String word2) {
         this.word1 = word1;
