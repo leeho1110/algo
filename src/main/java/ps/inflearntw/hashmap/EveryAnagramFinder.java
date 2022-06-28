@@ -19,63 +19,77 @@ public class EveryAnagramFinder {
         this.t = t;
     }
 
-    public Integer findAllOf() {
-        // #1: 아나그램을 비교할 수 있도록 Target(T 문자열)의 알파벳을 미리 세팅
-        createTarget();
+    public static EveryAnagramFinder of(String s, String t) {
+        return new EveryAnagramFinder(s, t);
+    }
 
-        // #2: S 문자열에서 T 문자열 바로 전까지 미리 넣어놓기
-        readyForSliding();
-
-        // #3: T의 마지막 글자부터 compareCase(S 부분문자열)을 바꿔가며 S의 끝 지점에 돌 때까지 아나그램인지 여부를 확인하기
-        for(rightPtr = t.length()-1; rightPtr <s.length(); rightPtr++){
-            // #3.1: comapreCase 갱신
-            compareCase.put(s.charAt(rightPtr), compareCase.getOrDefault(s.charAt(rightPtr),0) + 1);
-
-            // #3.2: 아나그램 여부 확인
-            if(isEqualToTarget()){
-                answer++;
-            };
-
-            // #3.3: leftPtr 위치의 문자를 compareCase에서 감소
-            compareCase.put(s.charAt(leftPtr), compareCase.get(s.charAt(leftPtr))-1);
-
-            // #3.4: 만약 한번도 나온 적이 없게 된다면 제거
-            if(compareCase.get(s.charAt(leftPtr)) == 0){
-                compareCase.remove(s.charAt(leftPtr));
-            }
-
-            // #3.5: leftPtr 밀어주기
-            leftPtr++;
-        }
-
+    public Integer find() {
+        createComparisonTarget();
+        readyForFind();
+        findAnagramCase();
         return answer;
     }
 
-    private void readyForSliding() {
-        for (int i = 0; i < t.length()-1; i++) {
-            compareCase.put(s.charAt(i), compareCase.getOrDefault(s.charAt(i),0) + 1);
+    private void createComparisonTarget() {
+        for (Character character : t.toCharArray()) {
+            target.put(character, target.getOrDefault(character, 0) + 1);
         }
     }
 
-    private void createTarget() {
-        for(Character character : t.toCharArray()){
-            target.put(character, target.getOrDefault(character,0) + 1);
+    private void readyForFind() {
+        for (int i = 0; i < t.length() - 1; i++) {
+            compareCase.put(s.charAt(i), compareCase.getOrDefault(s.charAt(i), 0) + 1);
         }
+    }
+
+    private void findAnagramCase() {
+        for (rightPtr = t.length() - 1; rightPtr < s.length(); rightPtr++) {
+            mergeValueOfRightPtrOnCompareCase();
+            if (isEqualToTarget()) {
+                answer++;
+            }
+
+            subtractValueOfLeftPointerOnCompareCase();
+            if (hasNotContain(s.charAt(leftPtr))) {
+                compareCase.remove(s.charAt(leftPtr));
+            }
+            leftPtr++;
+        }
+    }
+
+    private void mergeValueOfRightPtrOnCompareCase() {
+        compareCase.put(s.charAt(rightPtr), compareCase.getOrDefault(s.charAt(rightPtr), 0) + 1);
     }
 
     private Boolean isEqualToTarget() {
         Boolean equalFlag = Boolean.TRUE;
 
         for (Map.Entry<Character, Integer> entry : compareCase.entrySet()) {
-            if(!target.containsKey(entry.getKey())){
+            if (isNotContainKeyOf(entry)) {
                 equalFlag = Boolean.FALSE;
             }
 
-            if(!(target.get(entry.getKey()) == entry.getValue())){
+            if (isNotEqualToValueOf(entry)) {
                 equalFlag = Boolean.FALSE;
             }
         }
 
         return equalFlag;
+    }
+
+    private boolean isNotEqualToValueOf(Map.Entry<Character, Integer> entry) {
+        return !(target.get(entry.getKey()) == entry.getValue());
+    }
+
+    private boolean isNotContainKeyOf(Map.Entry<Character, Integer> entry) {
+        return !target.containsKey(entry.getKey());
+    }
+
+    private void subtractValueOfLeftPointerOnCompareCase() {
+        compareCase.put(s.charAt(leftPtr), compareCase.get(s.charAt(leftPtr)) - 1);
+    }
+
+    private boolean hasNotContain(Character valueOfLeftPtr) {
+        return compareCase.get(valueOfLeftPtr) == 0;
     }
 }
