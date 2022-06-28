@@ -15,10 +15,10 @@ public class ConcatTwoArrayTest {
     @Test
     public void test_getSystemInput(){
         // given
-        ConcatTwoArray sut = new ConcatTwoArray();
+        ConcatTwoArray sut = ConcatTwoArray.of(new int[]{1,3,5}, new int[]{2,3,6,7,9});
 
         // when
-        int[] result = sut.concat(new int[]{1,3,5}, new int[]{2,3,6,7,9});
+        int[] result = sut.concat();
 
         // then
         assertThat(result).containsExactly(1,2,3,3,5,6,7,9);
