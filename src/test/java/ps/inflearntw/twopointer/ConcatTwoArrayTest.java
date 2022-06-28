@@ -1,14 +1,12 @@
 package ps.inflearntw.twopointer;
 
 import org.junit.jupiter.api.Test;
-import ps.inflearntw.twopointer.ConcatTwoArray;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConcatTwoArrayTest {
 
     // 오름차순으로 정렬이 된 두 배열이 주어지면, 두 배열을 오름차순으로 합쳐 출력하는 프로그램을 작성하세요.
-
     // 첫 번째 줄에 첫 번째 배열의 크기
     // 두 번째 줄에 N개의 배열 원소가 오름차순으로 주어진다.
     // 세 번째 줄에 두 번째 배열의 크기
@@ -17,13 +15,12 @@ public class ConcatTwoArrayTest {
     @Test
     public void test_getSystemInput(){
         // given
-        int[] stub = new int[]{1,2,3,3,5,6,7,9};
-        ConcatTwoArray sut = ConcatTwoArray.of(new int[]{1,3,5}, new int[]{2,3,6,7,9});
+        ConcatTwoArray sut = new ConcatTwoArray();
 
         // when
-        int[] result = sut.sorting();
+        int[] result = sut.concat(new int[]{1,3,5}, new int[]{2,3,6,7,9});
 
         // then
-        assertThat(result).containsExactly(stub);
+        assertThat(result).containsExactly(1,2,3,3,5,6,7,9);
     }
 }
