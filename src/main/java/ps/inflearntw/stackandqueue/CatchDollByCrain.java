@@ -3,13 +3,13 @@ package ps.inflearntw.stackandqueue;
 import java.util.Stack;
 
 public class CatchDollByCrain {
-    private final int[][] basket;
+    private final int[][] boards;
     private final int[] moves;
-    private Stack<Integer> caughts = new Stack<>();
+    private Stack<Integer> basket = new Stack<>();
     private int answer;
 
-    public CatchDollByCrain(int[][] basket, int[] moves) {
-        this.basket = basket;
+    public CatchDollByCrain(int[][] boards, int[] moves) {
+        this.boards = boards;
         this.moves = moves;
     }
 
