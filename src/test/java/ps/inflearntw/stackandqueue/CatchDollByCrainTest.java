@@ -16,18 +16,10 @@ class CatchDollByCrainTest {
     게임 화면의 격자의 상태가 담긴 2차원 배열 board와 인형을 집기 위해 크레인을 작동시킨 위치가 담긴 배열 moves가 매개변수로 주어질 때,
     크레인을 모두 작동시킨 후 터트려져 사라진 인형의 개수를 구하는 프로그램을 작성하세요.
  */
-
+    
     @Test
     public void test(){
         // given
-//        Stack<Integer> dolls1 = new Stack<>(); dolls1.push(0);dolls1.push(0);dolls1.push(0);dolls1.push(0);dolls1.push(0);
-//        Stack<Integer> dolls2 = new Stack<>(); dolls2.push(0);dolls2.push(0);dolls2.push(1);dolls2.push(0);dolls2.push(3);
-//        Stack<Integer> dolls3 = new Stack<>(); dolls2.push(0);dolls2.push(2);dolls2.push(5);dolls2.push(0);dolls2.push(1);
-//        Stack<Integer> dolls4 = new Stack<>(); dolls2.push(4);dolls2.push(2);dolls2.push(4);dolls2.push(4);dolls2.push(2);
-//        Stack<Integer> dolls5 = new Stack<>(); dolls2.push(3);dolls2.push(5);dolls2.push(1);dolls2.push(3);dolls2.push(1);
-//        List<Stack<Integer>> basket = new ArrayList<>();
-//        basket.add(dolls1); basket.add(dolls2); basket.add(dolls3); basket.add(dolls4); basket.add(dolls5);
-
         int[] dolls1 = new int[]{0,0,0,4,3};
         int[] dolls2 = new int[]{0,0,2,2,5};
         int[] dolls3 = new int[]{0,1,5,4,1};

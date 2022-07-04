@@ -1,6 +1,5 @@
 package ps.inflearntw.stackandqueue;
 
-import java.util.Scanner;
 import java.util.Stack;
 
 public class CatchDollByCrain {
@@ -13,16 +12,6 @@ public class CatchDollByCrain {
         this.basket = basket;
         this.moves = moves;
     }
-
-    /*
-    TODO
-      setup: 정사각형으로 이뤄져 있고, N의 크기를 갖는 배열 선언하기, 크레인의 작동 순서가 담긴 배열의 크기, moves 배열 데이터
-      #1. moves 배열의 값을 하나씩 돈다
-            #1.1. 긴 한
-      #2. 값이 있다면 정답 스택에 값을 비교한다.
-            #2.1 peek()을 진행해서 값이 동일하면 넣지 않고, top 제거
-            #2.2 만약 동일 하지 않다면 push
-    */
 
     public Integer play() {
         for (int catchPoint : moves) {
