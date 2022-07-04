@@ -24,8 +24,6 @@ public class CatchDollByCrain {
                 }
             }
 
-            // 1. 큐에 최상단이 빈칸이라면, 빈칸이 아닐 때까지 꺼내기 (여기서 빈칸을 모두 비워)
-            // peek()을 진행해서 값이 동일하면 넣지 않고, top 제거
             if (doll != -1) {
                 if (!caughts.isEmpty() && caughts.peek() == doll) {
                     answer += 2;
