@@ -16,26 +16,47 @@ public class CatchDollByCrain {
     }
 
     public Integer play() {
-        for (int catchPoint : moves) {
-            int doll = -1;
-            for (int i = 0; i < basket[catchPoint - 1].length; i++) {
-                if (basket[catchPoint - 1][i] != 0) {
-                    doll = basket[catchPoint - 1][i];
-                    basket[catchPoint - 1][i] = 0;
-                    break;
-                }
-            }
+        for (int line : moves) {
+            compareBasketsTopWith(caughtDollOfSpecificLineOfBasket(line));
+        }
+        return answer;
+    }
 
-            if (doll != -1) {
-                if (!caughts.isEmpty() && caughts.peek() == doll) {
-                    answer += 2;
-                    caughts.pop();
-                } else {
-                    caughts.push(doll);
-                }
+    private int caughtDollOfSpecificLineOfBasket(int line) {
+        for (int height = 0; height < boards[line - 1].length; height++) {
+            int caughtDoll = boards[line - 1][height];
+            if (isNotEmpty(caughtDoll)) {
+                convertToEmptyOf(line, height);
+                return caughtDoll;
             }
         }
+        return EMPTY;
+    }
 
-        return answer;
+    private boolean isNotEmpty(int caughtDoll) {
+        return caughtDoll != EMPTY;
+    }
+
+    private void convertToEmptyOf(int point, int i) {
+        boards[point - 1][i] = EMPTY;
+    }
+
+    private void compareBasketsTopWith(int caughtDoll) {
+        if (isNotEmpty(caughtDoll)) {
+            if (hasDollInBasket() && isEqualToTopOfBasket(caughtDoll)) {
+                answer += CRASHED_DOLL_COUNT;
+                basket.pop();
+            } else {
+                basket.push(caughtDoll);
+            }
+        }
+    }
+
+    private boolean isEqualToTopOfBasket(int caughtDoll) {
+        return basket.peek() == caughtDoll;
+    }
+
+    private boolean hasDollInBasket() {
+        return !basket.isEmpty();
     }
 }
