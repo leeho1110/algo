@@ -5,9 +5,11 @@ import java.util.Stack;
 public class CatchDollByCrain {
     public static final int EMPTY = 0;
     public static final int CRASHED_DOLL_COUNT = 2;
+
     private final int[][] boards;
     private final int[] moves;
     private Stack<Integer> basket = new Stack<>();
+    
     private int answer;
 
     public CatchDollByCrain(int[][] boards, int[] moves) {
