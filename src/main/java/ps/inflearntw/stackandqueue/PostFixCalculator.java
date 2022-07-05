@@ -39,15 +39,7 @@ public class PostFixCalculator {
         Integer leftOperand = operands.pop();
 
         // #2-2. 연산을 진행하고, 연산의 결과값값을 다시 스택에 넣는다.
-        if (ele == '+') {
-            operands.push(leftOperand + rightOperand);
-        } else if (ele == '-') {
-            operands.push(leftOperand - rightOperand);
-        } else if (ele == '*') {
-            operands.push(leftOperand * rightOperand);
-        } else if (ele == '/') {
-            operands.push(leftOperand / rightOperand);
-        }
+        operands.push(Operator.findOperatorBy(ele).calculate(leftOperand, rightOperand));
     }
 
     enum Operator {
