@@ -1,6 +1,8 @@
 package ps.inflearntw.stackandqueue;
 
+import java.util.Arrays;
 import java.util.Stack;
+import java.util.function.BiFunction;
 
 public class PostFixCalculator {
     private final String expression;
@@ -48,4 +50,37 @@ public class PostFixCalculator {
         }
     }
 
+    enum Operator {
+        ADD('+', (num1, num2) -> num1 + num2),
+        MINUS('-', (num1, num2) -> num1 - num2),
+        MULTIPLY('*', (num1, num2) -> num1 * num2),
+        DIVIDE('/', (num1, num2) -> num1 / num2);
+
+        private final Character symbol;
+        private final BiFunction<Integer, Integer, Integer> expression;
+
+        Operator(Character symbol, BiFunction<Integer, Integer, Integer> expression) {
+            this.symbol = symbol;
+            this.expression = expression;
+        }
+
+        public Character getSymbol() {
+            return this.symbol;
+        }
+
+        public BiFunction<Integer, Integer, Integer> getExpression() {
+            return this.expression;
+        }
+
+        public Integer calculate(Integer num1, Integer num2) {
+            return getExpression().apply(num1, num2);
+        }
+
+        public static Operator findOperatorBy(Character symbol) {
+            return Arrays.stream(values())
+                    .filter(operator -> operator.getSymbol() == symbol)
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("잘못된 연산사 symbol입니다!"));
+        }
+    }
 }
