@@ -9,7 +9,7 @@ class CurriculumValidatorTest {
     @Test
     public void test(){
         // given
-        CurriculumValidator sut = new CurriculumValidator("CBA");
+        CurriculumValidator sut = CurriculumValidator.createMandatorySubjectsFrom("CBA");
 
         // when
         String result = sut.validate("CBDAGE");
@@ -21,7 +21,7 @@ class CurriculumValidatorTest {
     @Test
     public void test2(){
         // given
-        CurriculumValidator sut = new CurriculumValidator("AKDEF");
+        CurriculumValidator sut = CurriculumValidator.createMandatorySubjectsFrom("AKDEF");
 
         // when
         String result = sut.validate("AYKGDHEJ");

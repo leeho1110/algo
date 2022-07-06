@@ -1,14 +1,17 @@
 package ps.inflearntw.stackandqueue;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
 public class CurriculumValidator {
 
+    public static final String INVALID = "NO";
+    public static final String VALID = "YES";
     private final Queue<Character> mandatorySubjects = new ArrayDeque<>();
+
+    public static CurriculumValidator createMandatorySubjectsFrom(String mandatory){
+        return new CurriculumValidator(mandatory);
+    }
 
     public CurriculumValidator(String mandatory) {
         for (char subject : mandatory.toCharArray()) {
@@ -18,17 +21,27 @@ public class CurriculumValidator {
 
     public String validate(String curriculum) {
         for (Character subject : curriculum.toCharArray()) {
-            if(mandatorySubjects.contains(subject)){
-                if(!(mandatorySubjects.poll() == subject)){
-                    return "NO";
-                }
+            if(isMandatory(subject) && isDiffWithNextMandatory(subject)){
+                return INVALID;
             }
         }
 
-        if(!mandatorySubjects.isEmpty()){
-            return "NO";
+        if(hasMandatorySubject()){
+            return INVALID;
         }
 
-        return "YES";
+        return VALID;
+    }
+
+    private boolean isMandatory(Character subject) {
+        return mandatorySubjects.contains(subject);
+    }
+
+    private boolean isDiffWithNextMandatory(Character subject) {
+        return !(mandatorySubjects.poll() == subject);
+    }
+
+    private boolean hasMandatorySubject() {
+        return !mandatorySubjects.isEmpty();
     }
 }
