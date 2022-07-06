@@ -1,35 +1,39 @@
 package ps.inflearntw.stackandqueue;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.Buffer;
 import java.util.ArrayDeque;
 import java.util.Queue;
-import java.util.StringTokenizer;
 
 public class SavePrincess {
 
     private final int n;
+    private final Queue<Integer> princes = new ArrayDeque<>();
 
     public SavePrincess(int n) {
         this.n = n;
     }
 
     public Integer findLastPrince(int k) {
-        Queue<Integer> queue = new ArrayDeque<>();
+        lineUpPrices();
+        removePriceEvery3time(k);
+        return princes.peek();
+    }
 
+    private void lineUpPrices() {
         for (int i = 0; i < n; i++) {
-            queue.add(i + 1);
+            princes.add(i + 1);
         }
+    }
 
-        while(queue.size() > 1){
-            for(int i=0; i<k-1; i++){
-                queue.add(queue.poll());
+    private void removePriceEvery3time(int k) {
+        while(hasLeftOnlyOne()){
+            for(int i = 0; i< k -1; i++){
+                princes.add(princes.poll());
             }
-            queue.remove();
+            princes.remove();
         }
+    }
 
-        return queue.peek();
+    private boolean hasLeftOnlyOne() {
+        return princes.size() > 1;
     }
 }
