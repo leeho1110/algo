@@ -13,18 +13,26 @@ public class Ironbar {
 
     public Integer getSlicedBarCount() {
         for(int i=0; i<bar.length; i++){
-            if(bar[i] == '('){
+            if(isLeftBracket(i)){
                 barBasket.push(bar[i]);
             } else {
-                if(i != 0 && bar[i-1] == '('){
-                    barBasket.pop();
-                    answer += barBasket.size();
-                } else {
-                    barBasket.pop();
-                    answer++;
-                }
+                countSlicedBar(i);
             }
         }
         return answer;
+    }
+
+    private boolean isLeftBracket(int i) {
+        return bar[i] == '(';
+    }
+
+    private void countSlicedBar(int i) {
+        if(isLeftBracket(i - 1)){
+            barBasket.pop();
+            answer += barBasket.size();
+        } else {
+            barBasket.pop();
+            answer++;
+        }
     }
 }
