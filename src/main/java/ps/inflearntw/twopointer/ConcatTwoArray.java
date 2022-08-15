@@ -5,49 +5,59 @@ import java.util.List;
 
 public class ConcatTwoArray {
 
-    private final int[] array1, array2;
-    private final List<Integer> answer = new LinkedList<>();
-    private Integer leftPtr = 0;
-    private Integer rightPtr = 0;
+    private final int[] numbers1;
+    private final int[] numbers2;
 
-    public ConcatTwoArray(int[] array1, int[] array2) {
-        this.array2 = array2;
-        this.array1 = array1;
+    private List<Integer> answer = new LinkedList<>();
+    private int leftPointer = 0;
+    private int rightPointer = 0;
+
+    private ConcatTwoArray(int[] numbers1, int[] numbers2) {
+        this.numbers1 = numbers1;
+        this.numbers2 = numbers2;
     }
 
-    public static ConcatTwoArray of(int[] array1, int[] array2) {
-        return new ConcatTwoArray(array1, array2);
+    public static ConcatTwoArray of(int[] numbers1, int[] numbers2) {
+        return new ConcatTwoArray(numbers1, numbers2);
     }
 
     public int[] concat() {
-        findUntilRightPointerIsEqualToAnyArray();
-        addValueOfRemainArrayToAnswer();
+        findSmallerValueUntilAnyPointerIsEnded();
+        addLeastArraysValue();
         return answer.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    private void addValueOfRemainArrayToAnswer() {
-        if(leftPtr == array1.length){
-            for(int i = rightPtr; i< array2.length; i++){
-                answer.add(array2[i]);
+    private void addLeastArraysValue() {
+        if(leftPointer == numbers1.length){
+            for (int i = rightPointer; i < numbers2.length; i++) {
+                answer.add(numbers2[i]);
             }
         }
 
-        if(rightPtr == array2.length){
-            for(int i = leftPtr; i< array1.length; i++){
-                answer.add(array1[i]);
+        if(rightPointer == numbers2.length){
+            for (int i = leftPointer; i < numbers1.length; i++) {
+                answer.add(numbers1[i]);
             }
         }
     }
 
-    private void findUntilRightPointerIsEqualToAnyArray() {
-        while(leftPtr < array1.length && rightPtr < array2.length){
-            if(array1[leftPtr] > array2[rightPtr]){
-                answer.add(array2[rightPtr]);
-                rightPtr++;
+    private void findSmallerValueUntilAnyPointerIsEnded() {
+        while(untilAnyArraySearchIsEnded(leftPointer, rightPointer)){
+            if(compareTo(leftPointer, rightPointer)){
+                answer.add(numbers1[leftPointer]);
+                leftPointer++;
             } else {
-                answer.add(array1[leftPtr]);
-                leftPtr++;
+                answer.add(numbers2[rightPointer]);
+                rightPointer++;
             }
         }
+    }
+
+    private boolean compareTo(int leftPointer, int rightPointer) {
+        return numbers1[leftPointer] < numbers2[rightPointer];
+    }
+
+    private boolean untilAnyArraySearchIsEnded(int leftPointer, int rightPointer) {
+        return leftPointer < numbers1.length && rightPointer < numbers2.length;
     }
 }
