@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.dfs;
 
 import datastructure.Stack;
 

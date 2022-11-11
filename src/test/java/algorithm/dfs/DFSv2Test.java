@@ -1,14 +1,15 @@
-package algorithm;
+package algorithm.dfs;
 
-import algorithm.DFSv2.Node;
+import algorithm.dfs.DFSv2;
+import algorithm.dfs.DFSv2.Node;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static algorithm.DFSv2.Node.LeafDirection.LEFT;
-import static algorithm.DFSv2.Node.LeafDirection.RIGHT;
-import static algorithm.DFSv2.Traverse.*;
+import static algorithm.dfs.DFSv2.Node.LeafDirection.LEFT;
+import static algorithm.dfs.DFSv2.Node.LeafDirection.RIGHT;
+import static algorithm.dfs.DFSv2.Traverse.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DFSv2Test {
