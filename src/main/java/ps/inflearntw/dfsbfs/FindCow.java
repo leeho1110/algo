@@ -31,7 +31,7 @@ public class FindCow {
         alreadyChecked.add(myLocation);
         searchNodes.offer(myLocation);
 
-        while (!searchNodes.isEmpty()) {
+        while (isSearchNodeExist()) {
             // 검색 큐의 하나의 레벨의 길이를 구합니다.
             int sizeOfNodeLevel = searchNodes.size();
             for (int i = 0; i < sizeOfNodeLevel; i++) {
@@ -59,5 +59,20 @@ public class FindCow {
             jumpTime++;
         }
         return jumpTime;
+    }
+    private boolean isSearchNodeExist() {
+        return !searchNodes.isEmpty();
+    }
+
+    private boolean isAlreadyChecked(int jumpDistance) {
+        return !alreadyChecked.contains(searchNodes.peek() + jumpDistance);
+    }
+
+    private boolean isEqualTo(int cowLocation, int jumpDistance) {
+        return searchNodes.peek() + jumpDistance == cowLocation;
+    }
+
+    private boolean isLessThanZero(int jumpDistance) {
+        return searchNodes.peek() + jumpDistance > 0;
     }
 }
