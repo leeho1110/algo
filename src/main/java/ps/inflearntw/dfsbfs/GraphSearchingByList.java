@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static ps.inflearntw.dfsbfs.GraphSearchingByLinkedList.VISITING.NON_VISIT;
-import static ps.inflearntw.dfsbfs.GraphSearchingByLinkedList.VISITING.VISIT;
+import static ps.inflearntw.dfsbfs.GraphSearchingByList.VISITING.NON_VISIT;
+import static ps.inflearntw.dfsbfs.GraphSearchingByList.VISITING.VISIT;
 
 /**
  * 방향 그래프가 주어졌을 때 1번 정점부터 N번 정점으로 가는 모든 경로의 가지수를 출력하는 프로그램을 작성하세요.
  */
-public class GraphSearchingByLinkedList {
+public class GraphSearchingByList {
 
     enum VISITING {
         VISIT(1), NON_VISIT(0);
@@ -26,7 +26,7 @@ public class GraphSearchingByLinkedList {
     private int destination;
     private int answer;
 
-    public GraphSearchingByLinkedList(List<List<Integer>> directedGraph) {
+    public GraphSearchingByList(List<List<Integer>> directedGraph) {
         this.directedGraph = directedGraph;
         this.visitedNodes = new int[directedGraph.size()];
     }
@@ -76,7 +76,7 @@ public class GraphSearchingByLinkedList {
 
         List<List<Integer>> graph = Arrays.asList(nonIndexNode, nodeNumber1,nodeNumber2,nodeNumber3,nodeNumber4,nodeNumber5);
 
-        GraphSearchingByLinkedList graphSearcher = new GraphSearchingByLinkedList(graph);
+        GraphSearchingByList graphSearcher = new GraphSearchingByList(graph);
         int result = graphSearcher.findAllCaseOfVisit(5);
         System.out.println("result = " + result);
     }
