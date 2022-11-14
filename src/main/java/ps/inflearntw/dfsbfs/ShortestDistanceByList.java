@@ -26,6 +26,12 @@ public class ShortestDistanceByList {
     }
 
     public int search(int destination) {
+        /**
+         * 탐색을 위해 필요한 건 총 3가지
+         * 1. 탐색할 노드를 넣어둘 visitingPrepareQueue
+         * 2. 이미 지나온 노드를 기억할 visitedNodeList
+         * 3. 도착한 노드에 대한 거리를 기록할 distanceCostList
+         */
         this.destination = destination;
         BFS(1);
         return distanceCosts[destination];
