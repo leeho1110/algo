@@ -22,14 +22,14 @@ public class DuplicatedPermutation {
             permutation[0] = i;
 
             // 나머지 자연수를 순회하면서 중복되어 추가되도록 DFS
-            DFS(permutation,1);
+            DFS(permutation, 1);
         }
         return answer;
     }
 
     private void DFS(int[] permutation, int count) {
         // 만약 정해진 길이가 완료되면 정답 배열에 추가
-        if(count == this.count){
+        if (count == this.count) {
             // answer에는 값을 계속 더해줄 permutation 배열을 넣어선 안된다.
             // 참조형이기에 answer에 들어간 원본이 변하지 않도록 깊은 복사를 마친 새로운 배열을 넣어준다.
             answer.add(permutation.clone());
