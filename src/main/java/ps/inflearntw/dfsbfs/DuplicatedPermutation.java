@@ -1,7 +1,6 @@
 package ps.inflearntw.dfsbfs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DuplicatedPermutation {
