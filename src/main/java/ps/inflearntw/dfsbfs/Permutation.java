@@ -12,18 +12,18 @@ public class Permutation {
     private boolean[] check;
 
     public List<int[]> find(int[] numbers, int count) {
+        // 변수 초기화
         this.numbers = numbers;
         this.count = count;
 
+        // 전체 숫자 순회 탐색
         for (int i = 0; i < numbers.length; i++) {
-
+            // 순열 배열 및 체크 배열 초기화
             int[] permutation = new int[count];
-            permutation[0] = numbers[i];
-
             this.check = new boolean[numbers.length];
-            check[i] = true;
 
-            DFS(permutation, 1);
+            // DFS
+            DFS(permutation, 0);
         }
 
         return answer;
@@ -33,14 +33,21 @@ public class Permutation {
         if (count == this.count) {
             answer.add(permutation.clone());
         } else {
-            for (int i = 0; i < check.length; i++) {
-                if(isAlreadyUsed(i)){
+            // 숫자 배열을 탐색하며
+            for (int i = 0; i < numbers.length; i++) {
+                // 만약 사용되지 않았다면
+                if(isNotUsed(i)){
+                    // 값을 순열 조합에 추가하고
                     permutation[count] = numbers[i];
-                    checkUse(i, Usage.USE);
 
+                    // 사용 표시를 해준다
+                    checkUse(i, Usage.USED);
+
+                    // 이어서 순열 조합을 탐색한다
                     DFS(permutation, count+1);
 
-                    checkUse(i, Usage.UNUSE);
+                    // 탐색 이후엔 사용 표시를 풀어준다.
+                    checkUse(i, Usage.UNUSED);
                 }
             }
         }
@@ -50,11 +57,12 @@ public class Permutation {
         check[i] = usage.value;
     }
 
-    private boolean isAlreadyUsed(int i) {
+    private boolean isNotUsed(int i) {
         return check[i] == false;
     }
 
-    enum Usage {USE(true), UNUSE(false);
+    private enum Usage {
+        USED(true), UNUSED(false);
 
         private final boolean value;
 
